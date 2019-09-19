@@ -31,10 +31,18 @@ namespace Charlotte.Games
 			this.H = h;
 		}
 
+		private MapCell DefaultCell = new MapCell();
+
 		public MapCell this[int x, int y]
 		{
 			get
 			{
+				if (
+					x < 0 || this.W <= x ||
+					y < 0 || this.H <= y
+					)
+					return this.DefaultCell;
+
 				return this.Cells[x + y * this.W];
 			}
 		}

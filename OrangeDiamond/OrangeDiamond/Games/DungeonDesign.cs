@@ -12,8 +12,6 @@ namespace Charlotte.Games
 		public const int DUNG_SCREEN_W = 970;
 		public const int DUNG_SCREEN_H = 530;
 
-		public static DDSubScreen DungScreen = new DDSubScreen(DUNG_SCREEN_W, DUNG_SCREEN_H);
-
 		public static readonly D4Rect FRONT_WALL_0 = new D4Rect(30 * 0, 24 * 0, DUNG_SCREEN_W - (30 + 30) * 0, DUNG_SCREEN_H - (24 + 8) * 0);
 		public static readonly D4Rect FRONT_WALL_1 = new D4Rect(30 * 8, 24 * 8, DUNG_SCREEN_W - (30 + 30) * 8, DUNG_SCREEN_H - (24 + 8) * 8);
 		public static readonly D4Rect FRONT_WALL_2 = new D4Rect(30 * 12, 24 * 12, DUNG_SCREEN_W - (30 + 30) * 12, DUNG_SCREEN_H - (24 + 8) * 12);
