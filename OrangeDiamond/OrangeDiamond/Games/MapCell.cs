@@ -7,20 +7,11 @@ namespace Charlotte.Games
 {
 	public class MapCell
 	{
-		public Wall_e Wall_2 = Wall_e.NONE; // 南側
-		public Wall_e Wall_4 = Wall_e.NONE; // 西側
-		public Wall_e Wall_6 = Wall_e.NONE; // 東側
-		public Wall_e Wall_8 = Wall_e.NONE; // 北側
-
-		public string Structure = null; // null == 構造物無し
+		public MapWall Wall_2 = new MapWall(); // 南側
+		public MapWall Wall_4 = new MapWall(); // 西側
+		public MapWall Wall_6 = new MapWall(); // 東側
+		public MapWall Wall_8 = new MapWall(); // 北側
 
 		// <---- prm
-
-		public enum Wall_e
-		{
-			NONE = 1,
-			WALL,
-			GATE,
-		}
 	}
 }

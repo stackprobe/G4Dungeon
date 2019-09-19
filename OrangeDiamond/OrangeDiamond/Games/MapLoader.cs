@@ -35,11 +35,14 @@ namespace Charlotte.Games
 				mapLines = dest.ToArray();
 			}
 
-			Dictionary<string, string> mapDefines = DictionaryTools.Create<string>();
+			Dictionary<string, string> mapScripts = DictionaryTools.Create<string>();
 
 			while (c < lines.Length)
 			{
 				string line = lines[c++];
+
+				if (line.StartsWith(";")) // ? コメント
+					continue;
 
 				if (line == "")
 					break;
@@ -49,17 +52,25 @@ namespace Charlotte.Games
 				string name = tokens[0].Trim();
 				string value = tokens[1].Trim();
 
-				if (name == "") throw new DDError();
-				if (value == "") throw new DDError();
+				if (Regex.IsMatch(name, @"^[0-9A-Za-z]{2}:[2468]$") == false)
+					throw new DDError();
 
-				mapDefines.Add(name, value);
+				if (value == "")
+					throw new DDError();
+
+				mapScripts.Add(name, value);
 			}
 
-			Map map = Load(mapLines, mapDefines);
+			Map map = LoadMap(mapLines, mapScripts);
 
 			while (c < lines.Length)
 			{
-				var tokens = lines[c++].Split("=".ToArray(), 2);
+				string line = lines[c++];
+
+				if (line.StartsWith(";")) // ? コメント
+					continue;
+
+				var tokens = line.Split("=".ToArray(), 2);
 
 				string name = tokens[0].Trim();
 				string value = tokens[1].Trim();
@@ -72,7 +83,7 @@ namespace Charlotte.Games
 			return map;
 		}
 
-		private static Map Load(string[] mapLines, Dictionary<string, string> mapDefines)
+		private static Map LoadMap(string[] mapLines, Dictionary<string, string> mapScripts)
 		{
 			if (mapLines.Length < 3)
 				throw new DDError();
@@ -120,47 +131,63 @@ namespace Charlotte.Games
 
 					MapCell cell = map[x, y];
 
-					cell.Wall_8 = GetWall_NS(s8);
-					cell.Wall_2 = GetWall_NS(s2);
-					cell.Wall_4 = GetWall_WE(s4);
-					cell.Wall_6 = GetWall_WE(s6);
+					LoadWall_NS(cell.Wall_8, s8);
+					LoadWall_NS(cell.Wall_2, s2);
+					LoadWall_WE(cell.Wall_4, s4);
+					LoadWall_WE(cell.Wall_6, s6);
 
 					if (s5 == "  ")
 					{
-						cell.Structure = null;
+						// noop
 					}
 					else
 					{
-						cell.Structure = mapDefines[s5];
+						string s5_2 = s5 + ":2";
+						string s5_4 = s5 + ":4";
+						string s5_6 = s5 + ":6";
+						string s5_8 = s5 + ":8";
+
+						LoadScript(mapScripts, s5_2, cell.Wall_2);
+						LoadScript(mapScripts, s5_4, cell.Wall_4);
+						LoadScript(mapScripts, s5_6, cell.Wall_6);
+						LoadScript(mapScripts, s5_8, cell.Wall_8);
 					}
 				}
 			}
 			return map;
 		}
 
-		private static MapCell.Wall_e GetWall_NS(string s)
+		private static void LoadWall_NS(MapWall wall, string s)
 		{
 			switch (s)
 			{
-				case "  ": return MapCell.Wall_e.NONE;
-				case "--": return MapCell.Wall_e.WALL;
-				case "G-": return MapCell.Wall_e.GATE;
+				case "  ": wall.Kind = MapWall.Kind_e.NONE; break;
+				case "--": wall.Kind = MapWall.Kind_e.WALL; break;
+				case "G-": wall.Kind = MapWall.Kind_e.GATE; break;
 
 				default:
 					throw null; // never
 			}
 		}
 
-		private static MapCell.Wall_e GetWall_WE(string s)
+		private static void LoadWall_WE(MapWall wall, string s)
 		{
 			switch (s)
 			{
-				case " ": return MapCell.Wall_e.NONE;
-				case "|": return MapCell.Wall_e.WALL;
-				case "G": return MapCell.Wall_e.GATE;
+				case " ": wall.Kind = MapWall.Kind_e.NONE; break;
+				case "|": wall.Kind = MapWall.Kind_e.WALL; break;
+				case "G": wall.Kind = MapWall.Kind_e.GATE; break;
 
 				default:
 					throw null; // never
+			}
+		}
+
+		private static void LoadScript(Dictionary<string, string> mapScripts, string s, MapWall wall)
+		{
+			if (mapScripts.ContainsKey(s))
+			{
+				wall.Script = mapScripts[s];
 			}
 		}
 	}
