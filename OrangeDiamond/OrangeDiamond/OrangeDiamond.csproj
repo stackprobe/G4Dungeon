@@ -122,6 +122,8 @@
     <Compile Include="Common\DDUserDatStrings.cs" />
     <Compile Include="Common\DDUtils.cs" />
     <Compile Include="Common\DDWin32.cs" />
+    <Compile Include="Games\DungeonDesign.cs" />
+    <Compile Include="Games\Game.cs" />
     <Compile Include="Games\Map.cs" />
     <Compile Include="Games\MapCell.cs" />
     <Compile Include="Games\MapLoader.cs" />
