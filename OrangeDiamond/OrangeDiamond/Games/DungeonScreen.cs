@@ -15,9 +15,14 @@ namespace Charlotte.Games
 
 		public static void DrawFront(IDungeonLayout layout, bool walk = false)
 		{
-			DDDraw.DrawRect(DungScreen.ToPicture(), 0, 0, DungeonDesign.DUNG_SCREEN_W, DungeonDesign.DUNG_SCREEN_H);
-
 			Layout = layout;
+			DrawFront_Main(walk);
+			Layout = null;
+		}
+
+		private static void DrawFront_Main(bool walk)
+		{
+			DDDraw.DrawRect(DungScreen.ToPicture(), 0, 0, DungeonDesign.DUNG_SCREEN_W, DungeonDesign.DUNG_SCREEN_H);
 
 			if (walk)
 			{
@@ -33,7 +38,6 @@ namespace Charlotte.Games
 				DrawFrontLayer(DungeonDesign.FRONT_WALL_2, DungeonDesign.FRONT_WALL_1, 1);
 				DrawFrontLayer(DungeonDesign.FRONT_WALL_1, DungeonDesign.FRONT_WALL_0, 0);
 			}
-			Layout = null;
 		}
 
 		private static void DrawFrontLayer(D4Rect frontBaseRect, D4Rect behindBaseRect, int y)
@@ -74,6 +78,32 @@ namespace Charlotte.Games
 			}
 		}
 
+		public static void DrawLeftTurning(IDungeonLayout layout)
+		{
+			Layout = layout;
+			DrawLeftTurning_Main();
+			Layout = null;
+		}
+
+		private static void DrawLeftTurning_Main()
+		{
+			DDDraw.DrawRect(DungScreen.ToPicture(), 0, 0, DungeonDesign.DUNG_SCREEN_W, DungeonDesign.DUNG_SCREEN_H);
+
+			DrawWall(Layout.GetWall(0, 3, 4), DungeonDesign.LT_F3_L, 3);
+			DrawWall(Layout.GetWall(0, 2, 8), DungeonDesign.LT_F2_F, 2);
+			DrawWall(Layout.GetWall(0, 2, 4), DungeonDesign.LT_F2_L, 2);
+			DrawWall(Layout.GetWall(0, 1, 8), DungeonDesign.LT_F1_F, 1);
+			DrawWall(Layout.GetWall(0, 1, 4), DungeonDesign.LT_F1_L, 1);
+			DrawWall(Layout.GetWall(0, 0, 8), DungeonDesign.LT_F0_F, 0);
+
+			DrawWall(Layout.GetWall(-3, 0, 8), DungeonDesign.LT_L3_F, 3);
+			DrawWall(Layout.GetWall(-2, 0, 4), DungeonDesign.LT_L2_L, 2);
+			DrawWall(Layout.GetWall(-2, 0, 8), DungeonDesign.LT_L2_F, 2);
+			DrawWall(Layout.GetWall(-1, 0, 4), DungeonDesign.LT_L1_L, 1);
+			DrawWall(Layout.GetWall(-1, 0, 8), DungeonDesign.LT_L1_F, 1);
+			DrawWall(Layout.GetWall(0, 0, 4), DungeonDesign.LT_F0_L, 0);
+		}
+
 		private static void DrawWall(MapWall.Kind_e kind, P4Poly poly, double y)
 		{
 			DDPicture picture;
@@ -99,17 +129,6 @@ namespace Charlotte.Games
 			DDDraw.SetBright(bright, bright, bright);
 			DDDraw.DrawFree(picture, poly);
 			DDDraw.Reset();
-		}
-
-		public static void DrawLeftTurning(IDungeonLayout layout)
-		{
-			DDDraw.DrawRect(DungScreen.ToPicture(), 0, 0, DungeonDesign.DUNG_SCREEN_W, DungeonDesign.DUNG_SCREEN_H);
-
-			Layout = layout;
-
-			// TODO
-
-			Layout = null;
 		}
 	}
 }
