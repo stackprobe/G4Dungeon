@@ -30,17 +30,17 @@ namespace Charlotte.Games
 			this.W = w;
 			this.H = h;
 
-			this.DefaultCell_4.Wall_6.Kind = MapWall.Kind_e.WALL;
-			this.DefaultCell_6.Wall_4.Kind = MapWall.Kind_e.WALL;
-			this.DefaultCell_8.Wall_2.Kind = MapWall.Kind_e.WALL;
-			this.DefaultCell_2.Wall_8.Kind = MapWall.Kind_e.WALL;
+			this.DefaultCell_2_Wall.Wall_2.Kind = MapWall.Kind_e.WALL;
+			this.DefaultCell_4_Wall.Wall_4.Kind = MapWall.Kind_e.WALL;
+			this.DefaultCell_6_Wall.Wall_6.Kind = MapWall.Kind_e.WALL;
+			this.DefaultCell_8_Wall.Wall_8.Kind = MapWall.Kind_e.WALL;
 		}
 
 		private MapCell DefaultCell = new MapCell();
-		private MapCell DefaultCell_4 = new MapCell();
-		private MapCell DefaultCell_6 = new MapCell();
-		private MapCell DefaultCell_8 = new MapCell();
-		private MapCell DefaultCell_2 = new MapCell();
+		private MapCell DefaultCell_2_Wall = new MapCell();
+		private MapCell DefaultCell_4_Wall = new MapCell();
+		private MapCell DefaultCell_6_Wall = new MapCell();
+		private MapCell DefaultCell_8_Wall = new MapCell();
 
 		public MapCell this[int x, int y]
 		{
@@ -54,18 +54,18 @@ namespace Charlotte.Games
 					if (0 <= y && y < this.H)
 					{
 						if (x == -1)
-							return this.DefaultCell_4;
+							return this.DefaultCell_6_Wall;
 
 						if (x == this.W)
-							return this.DefaultCell_6;
+							return this.DefaultCell_4_Wall;
 					}
 					if (0 <= x && x < this.W)
 					{
 						if (y == -1)
-							return this.DefaultCell_8;
+							return this.DefaultCell_2_Wall;
 
 						if (y == this.H)
-							return this.DefaultCell_2;
+							return this.DefaultCell_8_Wall;
 					}
 					return this.DefaultCell;
 				}
@@ -78,6 +78,14 @@ namespace Charlotte.Games
 		public void AddProperty(string name, string value)
 		{
 			this.Properties.Add(name, value);
+		}
+
+		public string GetProperty(string name, string defval = null)
+		{
+			if (this.Properties.ContainsKey(name) == false)
+				return defval;
+
+			return this.Properties[name];
 		}
 	}
 }

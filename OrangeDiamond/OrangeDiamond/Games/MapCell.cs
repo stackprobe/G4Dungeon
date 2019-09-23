@@ -12,6 +12,8 @@ namespace Charlotte.Games
 		public MapWall Wall_6 = new MapWall(); // 東側
 		public MapWall Wall_8 = new MapWall(); // 北側
 
+		public string Script = null; // null == スクリプト無し
+
 		// <---- prm
 	}
 }

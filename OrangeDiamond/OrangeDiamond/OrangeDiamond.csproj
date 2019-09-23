@@ -126,11 +126,16 @@
     <Compile Include="Game3Common\CrashUtils.cs" />
     <Compile Include="Game3Common\SceneKeeper.cs" />
     <Compile Include="Game3Common\SlideUtils.cs" />
+    <Compile Include="Games\DungeonDesign.cs" />
+    <Compile Include="Games\DungeonScreen.cs" />
     <Compile Include="Games\Game.cs" />
+    <Compile Include="Games\IDungeonLayout.cs" />
     <Compile Include="Games\Map.cs" />
     <Compile Include="Games\MapCell.cs" />
     <Compile Include="Games\MapWall.cs" />
     <Compile Include="Games\MapLoader.cs" />
+    <Compile Include="Games\MapWallScript.cs" />
+    <Compile Include="Games\Player.cs" />
     <Compile Include="Games\Status.cs" />
     <Compile Include="Ground.cs" />
     <Compile Include="MainWin.cs">

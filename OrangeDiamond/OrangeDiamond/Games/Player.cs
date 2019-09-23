@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Charlotte.Games
 {
-	public class Status
+	public class Player
 	{
-		// TODO
+		public int X;
+		public int Y;
+		public int Direction; // 2468
 	}
 }

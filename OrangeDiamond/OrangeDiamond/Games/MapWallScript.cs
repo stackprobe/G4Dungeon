@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Charlotte.Games
 {
-	public class Status
+	public static class MapWallScript
 	{
-		// TODO
+		public const string START = "START";
 	}
 }

@@ -52,7 +52,7 @@ namespace Charlotte.Games
 				string name = tokens[0].Trim();
 				string value = tokens[1].Trim();
 
-				if (Regex.IsMatch(name, @"^[0-9A-Za-z]{2}:[2468]$") == false)
+				if (Regex.IsMatch(name, @"^[0-9A-Za-z]{2}(:[2468])?$") == false)
 					throw new DDError();
 
 				if (value == "")
@@ -147,10 +147,11 @@ namespace Charlotte.Games
 						string s5_6 = s5 + ":6";
 						string s5_8 = s5 + ":8";
 
-						LoadScript(mapScripts, s5_2, cell.Wall_2);
-						LoadScript(mapScripts, s5_4, cell.Wall_4);
-						LoadScript(mapScripts, s5_6, cell.Wall_6);
-						LoadScript(mapScripts, s5_8, cell.Wall_8);
+						LoadScript(mapScripts, s5_2, s => cell.Wall_2.Script = s);
+						LoadScript(mapScripts, s5_4, s => cell.Wall_4.Script = s);
+						LoadScript(mapScripts, s5_6, s => cell.Wall_6.Script = s);
+						LoadScript(mapScripts, s5_8, s => cell.Wall_8.Script = s);
+						LoadScript(mapScripts, s5, s => cell.Script = s);
 					}
 				}
 			}
@@ -183,11 +184,11 @@ namespace Charlotte.Games
 			}
 		}
 
-		private static void LoadScript(Dictionary<string, string> mapScripts, string s, MapWall wall)
+		private static void LoadScript(Dictionary<string, string> mapScripts, string s, Action<string> setScript)
 		{
 			if (mapScripts.ContainsKey(s))
 			{
-				wall.Script = mapScripts[s];
+				setScript(mapScripts[s]);
 			}
 		}
 	}
