@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Charlotte.Common;
+using Charlotte.Game3Common;
 
 namespace Charlotte.Games
 {
@@ -13,6 +14,10 @@ namespace Charlotte.Games
 		// <---- prm
 
 		public static Game I = null;
+
+		private DDPicture WallPicture;
+		private DDPicture GatePicture;
+		private DDPicture BackgroundPicture;
 
 		private Player Player = new Player();
 
@@ -28,27 +33,14 @@ namespace Charlotte.Games
 
 		public void Perform()
 		{
-			this.LoadStartPosition();
+			if (this.Map.Find(out this.Player.X, out this.Player.Y, cell => cell.Script == "START") == false)
+				throw new DDError();
+
 			this.Player.Direction = int.Parse(this.Map.GetProperty("START_DIRECTION"));
-		}
 
-		private void LoadStartPosition()
-		{
-			for (int x = 0; x < this.Map.W; x++)
-			{
-				for (int y = 0; y < this.Map.H; y++)
-				{
-					MapCell cell = this.Map[x, y];
-
-					if (cell.Script == "START")
-					{
-						this.Player.X = x;
-						this.Player.Y = y;
-						return;
-					}
-				}
-			}
-			throw new DDError();
+			this.WallPicture = CResource.GetPicture(this.Map.GetProperty("WALL_PICTURE"));
+			this.GatePicture = CResource.GetPicture(this.Map.GetProperty("GATE_PICTURE"));
+			this.BackgroundPicture = CResource.GetPicture(this.Map.GetProperty("BACKGROUND_PICTURE"));
 		}
 	}
 }

@@ -14,10 +14,14 @@
 |                     02|
 +--+--+--+--+--+--+--+--+
 
-01=START
-02=EXIT
-03:4=LOCKED
-04:6=LOCKED
-05:8=EVENT-0001
+01   = START
+02   = EXIT
+03:4 = LOCKED
+04:6 = LOCKED
+05:8 = EVENT-0001
 
-START_DIRECTION=8
+START_DIRECTION = 8
+;
+WALL_PICTURE = Wall\Wall0001.png
+GATE_PICTURE = Wall\Gate0001.png
+BACKGROUND_PICTURE = Wall\Background0001.png

@@ -11,7 +11,7 @@ namespace Charlotte.Tests
 	{
 		public void Test01()
 		{
-			MapLoader.Load("t0001.txt");
+			//MapLoader.Load("t0001.txt");
 		}
 	}
 }

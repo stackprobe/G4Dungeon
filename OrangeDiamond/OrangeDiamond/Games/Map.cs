@@ -87,5 +87,18 @@ namespace Charlotte.Games
 
 			return this.Properties[name];
 		}
+
+		public bool Find(out int x, out int y, Predicate<MapCell> match)
+		{
+			for (x = 0; x < this.W; x++)
+				for (y = 0; y < this.H; y++)
+					if (match(this[x, y]))
+						return true;
+
+			x = -1;
+			y = -1;
+
+			return false;
+		}
 	}
 }
