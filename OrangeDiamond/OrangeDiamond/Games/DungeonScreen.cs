@@ -22,27 +22,30 @@ namespace Charlotte.Games
 
 		private static void DrawFront_Main(bool walk)
 		{
-			DDDraw.DrawRect(DungScreen.ToPicture(), 0, 0, DungeonDesign.DUNG_SCREEN_W, DungeonDesign.DUNG_SCREEN_H);
+			using (DungScreen.Section())
+			{
+				DDDraw.DrawRect(Layout.GetBackgroundPicture(), 0, 0, DungeonDesign.DUNG_SCREEN_W, DungeonDesign.DUNG_SCREEN_H);
 
-			if (walk)
-			{
-				DrawFrontLayer(DungeonDesign.WALK_FRONT_WALL_4, DungeonDesign.WALK_FRONT_WALL_3, 3);
-				DrawFrontLayer(DungeonDesign.WALK_FRONT_WALL_3, DungeonDesign.WALK_FRONT_WALL_2, 2);
-				DrawFrontLayer(DungeonDesign.WALK_FRONT_WALL_2, DungeonDesign.WALK_FRONT_WALL_1, 1);
-				DrawFrontLayer(DungeonDesign.WALK_FRONT_WALL_1, DungeonDesign.WALK_FRONT_WALL_0, 0);
-			}
-			else
-			{
-				DrawFrontLayer(DungeonDesign.FRONT_WALL_4, DungeonDesign.FRONT_WALL_3, 3);
-				DrawFrontLayer(DungeonDesign.FRONT_WALL_3, DungeonDesign.FRONT_WALL_2, 2);
-				DrawFrontLayer(DungeonDesign.FRONT_WALL_2, DungeonDesign.FRONT_WALL_1, 1);
-				DrawFrontLayer(DungeonDesign.FRONT_WALL_1, DungeonDesign.FRONT_WALL_0, 0);
+				if (walk)
+				{
+					DrawLayer(DungeonDesign.WALK_FRONT_WALL_4, DungeonDesign.WALK_FRONT_WALL_3, 3);
+					DrawLayer(DungeonDesign.WALK_FRONT_WALL_3, DungeonDesign.WALK_FRONT_WALL_2, 2);
+					DrawLayer(DungeonDesign.WALK_FRONT_WALL_2, DungeonDesign.WALK_FRONT_WALL_1, 1);
+					DrawLayer(DungeonDesign.WALK_FRONT_WALL_1, DungeonDesign.WALK_FRONT_WALL_0, 0);
+				}
+				else
+				{
+					DrawLayer(DungeonDesign.FRONT_WALL_4, DungeonDesign.FRONT_WALL_3, 3);
+					DrawLayer(DungeonDesign.FRONT_WALL_3, DungeonDesign.FRONT_WALL_2, 2);
+					DrawLayer(DungeonDesign.FRONT_WALL_2, DungeonDesign.FRONT_WALL_1, 1);
+					DrawLayer(DungeonDesign.FRONT_WALL_1, DungeonDesign.FRONT_WALL_0, 0);
+				}
 			}
 		}
 
-		private static void DrawFrontLayer(D4Rect frontBaseRect, D4Rect behindBaseRect, int y)
+		private static void DrawLayer(D4Rect frontBaseRect, D4Rect behindBaseRect, int y)
 		{
-			DrawWall(Layout.GetWall(0, y, 8), frontBaseRect.Poly, y + 0.5);
+			DrawDungWall(Layout.GetWall(0, y, 8), frontBaseRect.Poly, y + 0.5);
 
 			int x;
 
@@ -55,11 +58,11 @@ namespace Charlotte.Games
 				if (DungeonDesign.DUNG_SCREEN_W <= frontRect.L)
 					break;
 
-				DrawWall(Layout.GetWall(x, y, 8), frontRect.Poly, y + 0.5);
+				DrawDungWall(Layout.GetWall(x, y, 8), frontRect.Poly, y + 0.5);
 
 				frontRect.L = frontBaseRect.L - x * frontBaseRect.W;
 
-				DrawWall(Layout.GetWall(-x, y, 8), frontRect.Poly, y + 0.5);
+				DrawDungWall(Layout.GetWall(-x, y, 8), frontRect.Poly, y + 0.5);
 			}
 			for (x -= 2; 0 <= x; x--)
 			{
@@ -69,16 +72,16 @@ namespace Charlotte.Games
 				frontRect.L = frontBaseRect.L + x * frontBaseRect.W;
 				behindRect.L = behindBaseRect.L + x * behindBaseRect.W;
 
-				DrawWall(Layout.GetWall(x, y, 6), new P4Poly(frontRect.RT, behindRect.RT, behindRect.RB, frontRect.RB), y);
+				DrawDungWall(Layout.GetWall(x, y, 6), new P4Poly(frontRect.RT, behindRect.RT, behindRect.RB, frontRect.RB), y);
 
 				frontRect.L = frontBaseRect.L - x * frontBaseRect.W;
 				behindRect.L = behindBaseRect.L - x * behindBaseRect.W;
 
-				DrawWall(Layout.GetWall(-x, y, 4), new P4Poly(behindRect.LT, frontRect.LT, frontRect.LB, behindRect.LB), y);
+				DrawDungWall(Layout.GetWall(-x, y, 4), new P4Poly(behindRect.LT, frontRect.LT, frontRect.LB, behindRect.LB), y);
 			}
 		}
 
-		private static void DrawWall(MapWall.Kind_e kind, P4Poly poly, double y)
+		private static void DrawDungWall(MapWall.Kind_e kind, P4Poly poly, double y)
 		{
 			DDPicture picture;
 
