@@ -9,7 +9,7 @@ namespace Charlotte.Games
 {
 	public static class DungeonDesign
 	{
-		public const int DUNG_SCREEN_W = 970;
+		public const int DUNG_SCREEN_W = 1440;
 		public const int DUNG_SCREEN_H = 530;
 
 		public static readonly D4Rect FRONT_WALL_0 = new D4Rect(30 * 0, 24 * 0, DUNG_SCREEN_W - (30 + 30) * 0, DUNG_SCREEN_H - (24 + 8) * 0);
