@@ -153,7 +153,7 @@ namespace Charlotte.Games
 				// Draw ...
 
 				DungeonScreen.DrawFront(this.Layout);
-				DDDraw.DrawCenter(DungeonScreen.DungScreen.ToPicture(), DDConsts.Screen_W / 2, DDConsts.Screen_H / 2);
+				this.DrawDungeon();
 
 				DDEngine.EachFrame();
 			}
@@ -161,7 +161,14 @@ namespace Charlotte.Games
 
 		private void DrawDungeon(double xSlideRate = 0.0)
 		{
-			DDDraw.DrawCenter(DungeonScreen.DungScreen.ToPicture(), DDConsts.Screen_W / 2 + xSlideRate * 200.0, DDConsts.Screen_H / 2); // kari
+			DDDraw.DrawCenter(DungeonScreen.DungScreen.ToPicture(), DDConsts.Screen_W / 2 + xSlideRate * 100.0, DDConsts.Screen_H / 2 - 150); // kari
+
+			// 仮枠線
+			DDDraw.SetBright(0, 0, 0);
+			DDDraw.DrawRect(DDGround.GeneralResource.WhiteBox, 0, 0, 85, DDConsts.Screen_H);
+			DDDraw.DrawRect(DDGround.GeneralResource.WhiteBox, DDConsts.Screen_W - 85, 0, 85, DDConsts.Screen_H);
+			DDDraw.DrawRect(DDGround.GeneralResource.WhiteBox, 0, 0, DDConsts.Screen_W, 10);
+			DDDraw.Reset();
 		}
 
 		private IDungeonLayout Layout = new LayoutInfo();
