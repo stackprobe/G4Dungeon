@@ -161,7 +161,7 @@ namespace Charlotte.Games
 
 		private void DrawDungeon(double xSlideRate = 0.0)
 		{
-			DDDraw.DrawCenter(DungeonScreen.DungScreen.ToPicture(), DDConsts.Screen_W / 2 + xSlideRate * 100.0, DDConsts.Screen_H / 2 - 150); // kari
+			DDDraw.DrawCenter(DungeonScreen.DungScreen.ToPicture(), DDConsts.Screen_W / 2 + xSlideRate * 90.0, DDConsts.Screen_H / 2 - 150); // kari
 
 			// 仮枠線
 			DDDraw.SetBright(0, 0, 0);
