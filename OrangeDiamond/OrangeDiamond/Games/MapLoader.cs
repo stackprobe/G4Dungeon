@@ -13,7 +13,7 @@ namespace Charlotte.Games
 	{
 		public static Map Load(string file)
 		{
-			file = Path.Combine("Map", file);
+			file = Path.Combine(@"Etoile\OrangeDiamond\Map", file);
 
 			string[] lines = FileTools.TextToLines(StringTools.ENCODING_SJIS.GetString(DDResource.Load(file)));
 			int c = 0;
