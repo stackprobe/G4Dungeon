@@ -41,9 +41,9 @@ namespace Charlotte.Games
 
 			this.Player.Direction = int.Parse(this.Map.GetProperty("START_DIRECTION"));
 
-			this.WallPicture = CResource.GetPicture(this.Map.GetProperty("WALL_PICTURE"));
-			this.GatePicture = CResource.GetPicture(this.Map.GetProperty("GATE_PICTURE"));
-			this.BackgroundPicture = CResource.GetPicture(this.Map.GetProperty("BACKGROUND_PICTURE"));
+			this.WallPicture = DDCResource.GetPicture(this.Map.GetProperty("WALL_PICTURE"));
+			this.GatePicture = DDCResource.GetPicture(this.Map.GetProperty("GATE_PICTURE"));
+			this.BackgroundPicture = DDCResource.GetPicture(this.Map.GetProperty("BACKGROUND_PICTURE"));
 
 			this.Frame = 0;
 
