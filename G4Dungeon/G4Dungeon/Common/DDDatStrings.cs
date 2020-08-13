@@ -27,7 +27,7 @@ namespace Charlotte.Common
 #else
 		// app > @ DatStringsFile
 
-		private const string DatStringsFile = @"Etoile\OrangeDiamond\DatStrings.txt";
+		private const string DatStringsFile = @"Etoile\G4Dungeon\DatStrings.txt";
 
 		// < app
 #endif
