@@ -7,6 +7,11 @@ C:\Factory\SubTools\makeDDResourceFile.exe ^
 	out\Resource.dat ^
 	C:\Factory\Program\MaskGZDataForDonut3\MaskGZData.exe
 
+C:\Factory\SubTools\makeDDResourceFile.exe ^
+	res ^
+	out\res.dat ^
+	C:\Factory\Program\MaskGZDataForDonut3\MaskGZData.exe
+
 C:\Factory\SubTools\CallConfuserCLI.exe G4Dungeon\G4Dungeon\bin\Release\G4Dungeon.exe out\G4Dungeon.exe
 rem COPY /B G4Dungeon\G4Dungeon\bin\Release\G4Dungeon.exe out
 COPY /B G4Dungeon\G4Dungeon\bin\Release\Chocolate.dll out
